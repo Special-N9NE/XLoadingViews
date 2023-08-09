@@ -1,14 +1,17 @@
-plugins {
+plugins{
     id 'com.android.library'
+    id 'maven-publish'
 }
 
 android {
     namespace 'org.nine.xloadingviews'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
-        minSdk 22
-
+        minSdk 27
+        targetSdk 34
+        versionCode 1
+        versionName "0.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -19,12 +22,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+
+}
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'org.nine.xloadingviews'
+            artifactId = 'xloadingviews'
+            version = '0.1.0'
+
+          //  from components.java
+        }
+    }
+    repositories {
+        maven {
+            name = 'XLoadingViews'
+            url = layout.buildDirectory.dir("repo")
+        }
     }
 }
-
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
